@@ -1,0 +1,12 @@
+# Virtual environment
+kidney/
+
+# Python
+__pycache__/
+*.pyc
+
+# MLflow
+mlruns/
+
+# Jupyter
+.ipynb_checkpoints/
