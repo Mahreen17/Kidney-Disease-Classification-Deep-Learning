@@ -10,3 +10,5 @@ mlruns/
 
 # Jupyter
 .ipynb_checkpoints/
+
+artifacts/*
