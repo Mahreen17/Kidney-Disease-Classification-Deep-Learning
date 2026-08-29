@@ -1,101 +1,164 @@
-# Kidney Disease Classification — MLflow & DVC
+# Kidney Disease Classification — Deep Learning, MLflow & DVC
 
-A deep learning project for **classifying kidney disease from medical images** using a structured, reproducible machine learning pipeline.
+A complete end-to-end deep learning project for classifying kidney medical images using **TensorFlow/Keras**, **MLflow** for experiment tracking, **DVC** for data and pipeline management, and **Flask** for model deployment.
 
-The project integrates **TensorFlow/Keras** for deep learning, **MLflow** for experiment and model tracking, and **DVC (Data Version Control)** for data versioning and pipeline management.
+[![Live Application](https://img.shields.io/badge/Live%20App-Render-brightgreen)](https://kidney-disease-classification-deep-girb.onrender.com)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning.git)
 
 ---
 
 ## Project Overview
 
-Kidney diseases can be identified and analyzed using medical imaging techniques. This project aims to build a deep learning model capable of classifying kidney-related medical images into their respective categories.
+This project implements a complete **machine learning pipeline** for kidney disease classification using deep learning and medical imaging. The workflow covers:
 
-The project follows an **end-to-end Machine Learning pipeline**, starting from data management and preprocessing to model training, evaluation, experiment tracking, and deployment.
+- Data ingestion and preparation
+- Convolutional Neural Network (CNN) model development
+- Model training and evaluation
+- Experiment tracking with MLflow
+- Pipeline management with DVC
+- Web-based Flask application
+- Docker containerization
+- Cloud deployment on Render
 
-### Main Objectives
+**Classification Categories:**
+- Normal
+- Tumor
 
-* Build a deep learning model for kidney disease image classification.
-* Create a reproducible ML pipeline.
-* Track experiments, parameters, metrics, and models using MLflow.
-* Version datasets and ML pipelines using DVC.
-* Maintain project configurations separately using YAML files.
-* Prepare the trained model for application/deployment.
+---
+
+## Project Objectives
+
+- Build a deep learning model for kidney image classification
+- Develop a structured and reproducible ML pipeline
+- Implement experiment tracking with MLflow
+- Manage data versioning and pipelines with DVC
+- Separate configuration from source code using YAML
+- Create a Flask web application for inference
+- Containerize with Docker
+- Deploy to cloud with Render
+- Maintain version control with Git and GitHub
 
 ---
 
 ## Technologies Used
 
-| Technology             | Purpose                                |
-| ---------------------- | -------------------------------------- |
-| Python 3.11            | Programming language                   |
-| TensorFlow / Keras     | Deep learning and image classification |
-| MLflow                 | Experiment and model tracking          |
-| DVC                    | Data and pipeline versioning           |
-| YAML                   | Configuration and parameter management |
-| Jupyter Notebook       | Research and experimentation           |
-| Streamlit / Python App | Model deployment                       |
-| Git / GitHub           | Source-code version control            |
+| Technology | Purpose |
+|-----------|---------|
+| **Python** | Programming language |
+| **TensorFlow/Keras** | Deep learning framework |
+| **NumPy** | Numerical operations |
+| **Pandas** | Data processing |
+| **Matplotlib & Seaborn** | Data visualization |
+| **MLflow** | Experiment and model tracking |
+| **DVC** | Data versioning and pipeline management |
+| **Flask** | Web application framework |
+| **Docker** | Application containerization |
+| **Render** | Cloud deployment platform |
+| **Git & GitHub** | Version control |
+| **Jupyter** | Interactive development |
 
 ---
 
 ## Project Structure
 
-```text
-Kidney-Disease-Classification/
+```
+Kidney-Disease-Classification-Deep-Learning/
 │
-├── .dvc/                    # DVC internal files
-├── .github/                 # GitHub-related configuration
+├── .dvc/                          # DVC configuration
+├── .github/                       # GitHub configuration
 │
-├── artifacts/               # Generated project artifacts
+├── artifacts/                     # Generated artifacts
+│   ├── data_ingestion/
+│   ├── prepare_base_model/
+│   ├── model_training/
+│   └── model_evaluation/
 │
 ├── config/
-│   └── config.yaml          # Project configuration
+│   └── config.yaml               # Project configuration
 │
-├── research/
-│   └── *.ipynb              # Experiments and research notebooks
+├── model/
+│   └── model.h5                  # Trained model
 │
-├── src/
-│   └── cnnClassifier/
-│       ├── components/      # Individual pipeline components
-│       ├── config/          # Configuration management
-│       ├── constants/       # Project constants
-│       ├── entity/          # Configuration entities
-│       ├── pipeline/        # ML pipeline stages
-│       └── utils/           # Utility functions
+├── research/                      # Experimentation notebooks
+│   ├── 01_data_ingestion.ipynb
+│   ├── 02_prepare_base_model.ipynb
+│   ├── 03_model_training.ipynb
+│   └── 04_model_evaluation_with_mlflow.ipynb
 │
-├── templates/               # Application templates
+├── src/cnnClassifier/
+│   ├── components/               # Core pipeline components
+│   │   ├── data_ingestion.py
+│   │   ├── prepare_base_model.py
+│   │   ├── model_training.py
+│   │   └── model_evaluation_mlflow.py
+│   │
+│   ├── config/
+│   │   └── configuration.py
+│   │
+│   ├── constants/
+│   │   └── __init__.py
+│   │
+│   ├── entity/
+│   │   └── config_entity.py
+│   │
+│   ├── pipeline/                 # ML pipeline stages
+│   │   ├── stage_01_data_ingestion.py
+│   │   ├── stage_02_prepare_base_model.py
+│   │   ├── stage_03_model_training.py
+│   │   └── stage_04_model_evaluation.py
+│   │
+│   └── utils/
+│       └── common.py
 │
-├── app.py                   # Application / deployment entry point
-├── config.yaml              # Main configuration file
-├── params.yaml              # Model and training parameters
-├── dvc.yaml                 # DVC pipeline definition
-├── requirements.txt         # Python dependencies
-├── setup.py                 # Package setup
-├── README.md                # Project documentation
-└── .gitignore               # Git ignored files
+├── templates/
+│   └── index.html                # Web interface
+│
+├── app.py                        # Flask application
+├── config.yaml                   # Configuration file
+├── params.yaml                   # Model parameters
+├── dvc.yaml                      # DVC pipeline definition
+├── requirements.txt              # Python dependencies
+├── setup.py                      # Project setup
+├── Dockerfile                    # Docker configuration
+├── .gitignore
+└── README.md
 ```
-
-> **Note:** The exact folder structure may vary depending on the stages implemented in the project.
 
 ---
 
-## Key Configuration Files
+## Model Information
+
+### Architecture
+- **Type:** Convolutional Neural Network (CNN)
+- **Framework:** TensorFlow/Keras
+- **Base Model:** Utilized transfer learning approach
+
+### Input Specifications
+- **Image Size:** 224 × 224 pixels
+- **Normalization:** `image / 255.0`
+- **Classes:** 2 (Normal, Tumor)
+- **Output Model:** `model/model.h5`
+
+### Prediction Pipeline
+```
+Input Image → Load → Resize (224×224) → Convert to Array 
+→ Normalize → Add Batch Dimension → CNN Model → Argmax 
+→ Prediction (Normal/Tumor)
+```
+
+---
+
+## Configuration Management
 
 ### `config.yaml`
-
-Contains the project's general configuration settings, such as:
-
-* Dataset paths
-* Model directories
-* Artifact locations
-* Training-related configuration
+Stores project-level settings:
+- Dataset locations
+- Artifact directories
+- Model paths
+- Training-related paths
 
 ### `params.yaml`
-
-Stores model and training parameters separately from the source code.
-
-Example:
-
+Stores model and training parameters:
 ```yaml
 AUGMENTATION: True
 IMAGE_SIZE: [224, 224, 3]
@@ -107,339 +170,287 @@ WEIGHTS: imagenet
 LEARNING_RATE: 0.01
 ```
 
-Keeping parameters in a separate file makes it easier to experiment with different configurations without modifying the Python source code.
-
-### `dvc.yaml`
-
-Defines the different stages of the machine learning pipeline.
-
-A typical pipeline may contain stages such as:
-
-```text
-Data Ingestion
-      ↓
-Prepare Base Model
-      ↓
-Model Training
-      ↓
-Model Evaluation
-```
-
-DVC allows these stages to be executed in a reproducible manner.
-
 ---
 
-## MLflow
+## Setup & Installation
 
-**MLflow** is used to track machine learning experiments.
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
+- Git
 
-It can record:
-
-* Parameters
-* Training metrics
-* Model performance
-* Experiments
-* Trained models
-* Artifacts
-
-This makes it easier to compare different experiments and understand which configuration produces the best model.
-
-### Example MLflow Workflow
-
-```text
-Model Training
-      ↓
-Parameters
-      ↓
-Metrics
-      ↓
-MLflow Tracking
-      ↓
-Experiment Comparison
-      ↓
-Best Model
+### 1. Clone Repository
+```bash
+git clone https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning.git
+cd Kidney-Disease-Classification-Deep-Learning
 ```
 
----
-
-## DVC
-
-**DVC (Data Version Control)** is used to manage datasets and machine learning pipelines.
-
-Git is mainly used for tracking source code, while DVC can track large datasets and generated ML artifacts.
-
-### DVC Workflow
-
-```text
-Dataset
-   ↓
-DVC Tracking
-   ↓
-Pipeline Definition
-   ↓
-Model Training
-   ↓
-Model Evaluation
-```
-
-This helps make the project **reproducible** and easier to maintain.
-
----
-
-## Python Virtual Environment
-
-The original tutorial uses **Anaconda/Conda**, but this project uses Python's built-in **`venv`** instead.
-
-### Create the virtual environment
-
+### 2. Create Virtual Environment
 ```bash
 python -m venv kidney
 ```
 
-### Activate the environment — Windows
+### 3. Activate Virtual Environment
 
+**On Windows:**
 ```bash
 kidney\Scripts\activate
 ```
 
-After activation, the terminal should show:
-
-```text
-(kidney)
+**On macOS/Linux:**
+```bash
+source kidney/bin/activate
 ```
 
-### Upgrade pip
-
+### 4. Upgrade pip
 ```bash
 python -m pip install --upgrade pip
 ```
 
-### Install project dependencies
-
+### 5. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## Why Python 3.11?
+## Running Locally
 
-During setup, an issue occurred while installing:
-
-```text
-tensorflow==2.12.0
-```
-
-The error indicated that the requested TensorFlow version was not compatible with the Python version initially being used.
-
-The environment was therefore configured using a **compatible Python version**, such as Python 3.11.
-
-The recommended setup is:
-
-```text
-Python 3.11
-     ↓
-   venv
-     ↓
-  kidney
-     ↓
-requirements.txt
-```
-
----
-
-## Project Setup
-
-### 1. Clone the repository
-
-```bash
-git clone <https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning.git>
-```
-
-### 2. Open the project
-
-```bash
-cd Kidney-Disease-Classification
-```
-
-### 3. Create the virtual environment
-
-```bash
-python -m venv kidney
-```
-
-### 4. Activate the environment
-
-```bash
-kidney\Scripts\activate
-```
-
-### 5. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 6. Initialize DVC
-
-```bash
-dvc init
-```
-
-> If DVC has already been initialized in the repository, do not run `dvc init` again.
-
-### 7. Run the pipeline
-
+### 1. Execute DVC Pipeline
 ```bash
 dvc repro
 ```
+This runs the complete ML pipeline:
+- Data Ingestion
+- Base Model Preparation
+- Model Training
+- Model Evaluation
 
-### 8. Run the application
-
+### 2. Launch Flask Application
 ```bash
 python app.py
 ```
 
----
+The application will be available at `http://localhost:5000`
 
-## Machine Learning Pipeline
-
-The overall workflow of the project is:
-
-```text
-                    ┌─────────────────┐
-                    │     Dataset     │
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ Data Ingestion  │
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ Data Preparation│
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │  Base Model     │
-                    │  Preparation    │
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ Model Training  │
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ Model Evaluation│
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ MLflow Tracking │
-                    └────────┬────────┘
-                             ↓
-                    ┌─────────────────┐
-                    │ Model Deployment│
-                    └─────────────────┘
-```
-
-DVC manages the reproducibility of the pipeline, while MLflow tracks experiments and model performance.
+### 3. Access the Web Interface
+- **Home Page:** `GET /`
+- **Training:** `GET /train` or `POST /train`
+- **Prediction:** `POST /predict`
 
 ---
 
-## Experiment Tracking
+## Docker & Deployment
 
-MLflow can be used to compare multiple training experiments.
-
-For example:
-
-```text
-Experiment 1
-├── Learning Rate: 0.01
-├── Epochs: 10
-└── Accuracy: ...
-
-Experiment 2
-├── Learning Rate: 0.001
-├── Epochs: 20
-└── Accuracy: ...
-
-Experiment 3
-├── Learning Rate: 0.0001
-├── Epochs: 30
-└── Accuracy: ...
+### Build Docker Image
+```bash
+docker build -t kidney-disease-classifier .
 ```
 
-The experiments can then be compared to identify the best-performing configuration.
+### Run Docker Container
+```bash
+docker run -p 5000:5000 kidney-disease-classifier
+```
+
+### Docker Configuration
+- **Base Image:** `python:3.8-slim-buster`
+- **Working Directory:** `/app`
+- **Entry Point:** `python3 app.py`
+
+### Cloud Deployment (Render)
+```
+GitHub Repository
+    ↓
+Dockerfile
+    ↓
+Render Build
+    ↓
+Docker Container
+    ↓
+Flask Application
+    ↓
+Live Web Application
+```
+
+**Live Application:** [Kidney Disease Classification on Render](https://kidney-disease-classification-deep-girb.onrender.com)
+
+---
+
+## DVC Pipeline Management
+
+The DVC pipeline is defined in `dvc.yaml` and follows this workflow:
+
+```
+Data Ingestion
+    ↓
+Prepare Base Model
+    ↓
+Model Training
+    ↓
+Model Evaluation
+```
+
+**Run entire pipeline:**
+```bash
+dvc repro
+```
+
+**Visualize pipeline:**
+```bash
+dvc dag
+```
+
+---
+
+## MLflow Experiment Tracking
+
+MLflow tracks:
+- Experiment runs
+- Model parameters
+- Training metrics
+- Model artifacts
+- Evaluation results
+
+**Access MLflow UI:**
+```bash
+mlflow ui
+```
+
+Navigate to `http://localhost:5000` to view experiment dashboard.
+
+### Dashboard
+
+![MLflow Dashboard](https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning/blob/main/Screenshot%202026-08-29%20162038.png)
+
+---
+
+## End-to-End Workflow
+
+```
+Medical Image Dataset
+    ↓
+Data Ingestion (DVC)
+    ↓
+Data Preparation
+    ↓
+Base Model Preparation
+    ↓
+Model Training
+    ↓
+Model Evaluation
+    ├─ DVC (Pipeline Management)
+    └─ MLflow (Experiment Tracking)
+    ↓
+Trained Model (model/model.h5)
+    ↓
+Prediction Pipeline
+    ↓
+Flask Web Application
+    ↓
+Docker Container
+    ↓
+Render Deployment
+    ↓
+Live Application
+```
+
+---
+
+## API Usage
+
+### Prediction Endpoint
+```bash
+POST /predict
+Content-Type: multipart/form-data
+
+# Upload image file
+```
+
+**Response:**
+```json
+[
+    {
+        "image": "Normal"
+    }
+]
+```
+
+or
+
+```json
+[
+    {
+        "image": "Tumor"
+    }
+]
+```
+
+---
+
+## Key Dependencies
+
+```
+tensorflow==2.12.0
+pandas
+dvc
+mlflow==2.2.2
+notebook
+numpy
+matplotlib
+seaborn
+python-box==6.0.2
+pyYAML
+Flask
+Flask-Cors
+gdown
+```
+
+See `requirements.txt` for complete list.
 
 ---
 
 ## Reproducibility
 
-One of the main goals of this project is **reproducibility**.
+This project ensures reproducibility through:
 
-The combination of:
-
-```text
-Git
- +
-DVC
- +
-MLflow
- +
-YAML Configuration
- +
-Virtual Environment
-```
-
-helps ensure that experiments and model training can be repeated consistently.
-
----
-
-## Expected Outcome
-
-At the end of the project, the system should provide an end-to-end workflow for:
-
-```text
-Medical Images
-      ↓
-Data Processing
-      ↓
-Deep Learning Model
-      ↓
-Kidney Disease Classification
-      ↓
-Model Evaluation
-      ↓
-MLflow Experiment Tracking
-      ↓
-DVC Pipeline & Versioning
-      ↓
-Application Deployment
-```
+| Tool | Purpose |
+|------|---------|
+| **Git** | Source code version control |
+| **GitHub** | Remote repository hosting |
+| **DVC** | Dataset and pipeline versioning |
+| **MLflow** | Experiment tracking |
+| **YAML** | Configuration management |
+| **venv** | Environment isolation |
+| **Docker** | Containerization |
+| **Render** | Consistent deployment |
 
 ---
 
 ## Future Improvements
 
-Possible improvements include:
-
-* Hyperparameter tuning
-* Data augmentation
-* Improving model architecture
-* Increasing classification accuracy
-* Adding more evaluation metrics
-* Comparing multiple deep learning architectures
-* Model versioning with MLflow
-* Automated CI/CD
-* Cloud deployment
-* Improved application UI
+- Improve model accuracy and performance
+- Expand dataset with more diverse samples
+- Implement advanced data augmentation
+- Perform hyperparameter tuning
+- Compare different CNN architectures
+- Add confidence scores to predictions
+- Enhance web interface UX/UI
+- Implement robust model validation
+- Add CI/CD automated workflows
+- Use production-grade WSGI server
+- Implement comprehensive logging
+- Add model versioning and lifecycle management
 
 ---
 
 ## Medical Disclaimer
 
-This project is intended **for educational and research purposes only**.
+**This project is for educational and research purposes only.**
 
-It is not a certified medical diagnostic system and should not be used as a substitute for professional medical advice, diagnosis, or treatment.
+- Not a certified medical diagnostic system
+- Should not substitute professional medical advice
+- Predictions are not medically validated results
+- For research and educational demonstration only
 
 ---
 
@@ -451,6 +462,23 @@ B.Tech — Artificial Intelligence & Data Science
 
 ---
 
-## Project Goal
+## Links
 
-> **Build a reproducible deep learning pipeline for kidney disease classification while learning industry-standard tools such as MLflow, DVC, Git, and Python virtual environments.**
+- **Live Application:** [Kidney Disease Classification on Render](https://kidney-disease-classification-deep-girb.onrender.com)
+- **GitHub Repository:** [Mahreen17/Kidney-Disease-Classification-Deep-Learning](https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning.git)
+
+---
+
+## Acknowledgments
+
+- TensorFlow/Keras documentation
+- MLflow project management
+- DVC pipeline management
+- Render deployment platform
+- Open-source community contributions
+
+---
+
+**Project Status:** Complete and Deployed
+
+All components including deep learning model, pipeline, web application, and cloud deployment are fully functional.
