@@ -18,3 +18,5 @@ logs/
 
 # Generated model/data artifacts
 artifacts/*
+
+model/model.h5
