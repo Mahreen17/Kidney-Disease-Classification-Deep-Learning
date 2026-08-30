@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Kidney Disease Classification</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -16,42 +23,63 @@
         body {
             font-family: "Segoe UI", Arial, sans-serif;
             min-height: 100vh;
+
             background:
-                radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08), transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.08), transparent 30%),
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(79, 70, 229, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(14, 165, 233, 0.08),
+                    transparent 30%
+                ),
                 #f5f7fb;
+
             color: #172033;
         }
 
         .navbar {
             height: 72px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 7%;
+
             background: rgba(255, 255, 255, 0.92);
             border-bottom: 1px solid #e7eaf0;
+
             backdrop-filter: blur(10px);
         }
 
         .brand {
             display: flex;
             align-items: center;
+
             gap: 12px;
+
             font-size: 19px;
             font-weight: 700;
+
             color: #18233a;
         }
 
         .brand-icon {
             width: 40px;
             height: 40px;
+
             border-radius: 12px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             background: #eef2ff;
             color: #4f46e5;
+
             font-size: 20px;
             font-weight: 800;
         }
@@ -59,7 +87,9 @@
         .status {
             display: flex;
             align-items: center;
+
             gap: 8px;
+
             font-size: 13px;
             color: #667085;
         }
@@ -67,35 +97,50 @@
         .status-dot {
             width: 8px;
             height: 8px;
+
             border-radius: 50%;
+
             background: #22c55e;
         }
 
         .hero {
             max-width: 1180px;
+
             margin: 0 auto;
+
             padding: 58px 24px 30px;
+
             text-align: center;
         }
 
         .eyebrow {
             display: inline-block;
+
             padding: 7px 14px;
+
             border-radius: 999px;
+
             background: #eef2ff;
             color: #4f46e5;
+
             font-size: 12px;
             font-weight: 700;
+
             letter-spacing: 0.7px;
             text-transform: uppercase;
+
             margin-bottom: 17px;
         }
 
         .hero h1 {
             font-size: clamp(32px, 5vw, 50px);
+
             line-height: 1.1;
+
             letter-spacing: -1.5px;
+
             margin-bottom: 15px;
+
             color: #172033;
         }
 
@@ -105,27 +150,41 @@
 
         .hero p {
             max-width: 680px;
+
             margin: 0 auto;
+
             color: #667085;
+
             font-size: 16px;
+
             line-height: 1.7;
         }
 
         .dashboard {
             max-width: 1120px;
+
             margin: 25px auto 70px;
+
             padding: 0 24px;
+
             display: grid;
+
             grid-template-columns: 1.05fr 0.95fr;
+
             gap: 24px;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.95);
+
             border: 1px solid #e5e8ef;
+
             border-radius: 22px;
+
             padding: 27px;
-            box-shadow: 0 14px 40px rgba(20, 30, 55, 0.07);
+
+            box-shadow:
+                0 14px 40px rgba(20, 30, 55, 0.07);
         }
 
         .card-header {
@@ -134,66 +193,101 @@
 
         .card-header h2 {
             font-size: 19px;
+
             margin-bottom: 6px;
         }
 
         .card-header p {
             color: #7a8496;
+
             font-size: 13px;
         }
 
         .upload-area {
             min-height: 330px;
+
             border: 2px dashed #cfd5e2;
+
             border-radius: 18px;
+
             background: #fafbfe;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             position: relative;
+
             overflow: hidden;
+
             transition: 0.25s ease;
+
+            cursor: pointer;
         }
 
         .upload-area:hover {
             border-color: #818cf8;
+
             background: #f8f8ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #4f46e5;
+
+            background: #eef2ff;
+
+            transform: scale(1.01);
         }
 
         .upload-placeholder {
             text-align: center;
+
             padding: 30px;
+
+            pointer-events: none;
         }
 
         .upload-icon {
             width: 65px;
             height: 65px;
+
             margin: 0 auto 18px;
+
             border-radius: 18px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             background: #eef2ff;
+
             color: #4f46e5;
+
             font-size: 28px;
         }
 
         .upload-placeholder h3 {
             font-size: 17px;
+
             margin-bottom: 7px;
         }
 
         .upload-placeholder p {
             color: #8791a3;
+
             font-size: 13px;
+
             margin-bottom: 20px;
         }
 
         #photo {
             display: none;
+
             width: 100%;
             height: 330px;
+
             object-fit: contain;
+
             padding: 10px;
         }
 
@@ -203,57 +297,82 @@
 
         .buttons {
             display: flex;
+
             gap: 12px;
+
             margin-top: 18px;
         }
 
         .btn {
             flex: 1;
+
             height: 48px;
+
             border: none;
+
             border-radius: 12px;
+
             font-size: 14px;
+
             font-weight: 700;
+
             cursor: pointer;
+
             transition: 0.2s ease;
         }
 
         .btn-upload {
             background: #eef2ff;
+
             color: #4f46e5;
         }
 
         .btn-upload:hover {
             background: #e0e7ff;
+
             transform: translateY(-1px);
         }
 
         .btn-predict {
             background: #4f46e5;
+
             color: white;
-            box-shadow: 0 8px 18px rgba(79, 70, 229, 0.2);
+
+            box-shadow:
+                0 8px 18px rgba(79, 70, 229, 0.2);
         }
 
         .btn-predict:hover {
             background: #4338ca;
+
             transform: translateY(-1px);
         }
 
         .btn:disabled {
             opacity: 0.5;
+
             cursor: not-allowed;
+
             transform: none;
         }
 
         .result-box {
             min-height: 330px;
+
             border-radius: 18px;
+
             background: #f8fafc;
+
             border: 1px solid #e7ebf2;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             padding: 25px;
+
             text-align: center;
         }
 
@@ -264,23 +383,32 @@
         .result-empty .result-icon {
             width: 62px;
             height: 62px;
+
             border-radius: 50%;
+
             margin: 0 auto 16px;
+
             background: #eef2f7;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             font-size: 25px;
         }
 
         .result-empty h3 {
             color: #475467;
+
             font-size: 17px;
+
             margin-bottom: 7px;
         }
 
         .result-empty p {
             font-size: 13px;
+
             line-height: 1.6;
         }
 
@@ -290,16 +418,23 @@
 
         .result-label {
             font-size: 12px;
+
             color: #7a8496;
+
             text-transform: uppercase;
+
             letter-spacing: 1px;
+
             font-weight: 700;
+
             margin-bottom: 10px;
         }
 
         .prediction {
             font-size: 38px;
+
             font-weight: 800;
+
             margin-bottom: 12px;
         }
 
@@ -313,97 +448,141 @@
 
         .result-message {
             font-size: 14px;
+
             color: #667085;
+
             line-height: 1.6;
+
             max-width: 360px;
+
             margin: 0 auto;
         }
 
         .result-divider {
             height: 1px;
+
             background: #e6e9ef;
+
             margin: 22px 0;
         }
 
         .result-note {
             font-size: 12px;
+
             color: #98a2b3;
+
             line-height: 1.5;
         }
 
         .info-section {
             max-width: 1120px;
+
             margin: -35px auto 65px;
+
             padding: 0 24px;
+
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
+
             gap: 18px;
         }
 
         .info-card {
             background: white;
+
             border: 1px solid #e6e9ef;
+
             border-radius: 16px;
+
             padding: 20px;
         }
 
         .info-card h3 {
             font-size: 14px;
+
             margin-bottom: 7px;
         }
 
         .info-card p {
             font-size: 12px;
+
             color: #7a8496;
+
             line-height: 1.6;
         }
 
         footer {
             border-top: 1px solid #e5e8ef;
+
             background: rgba(255, 255, 255, 0.75);
+
             text-align: center;
+
             padding: 22px;
+
             color: #8a94a6;
+
             font-size: 12px;
         }
 
         #loading {
             display: none;
+
             position: fixed;
+
             inset: 0;
+
             z-index: 9999;
+
             background: rgba(255, 255, 255, 0.82);
+
             backdrop-filter: blur(5px);
+
             align-items: center;
+
             justify-content: center;
         }
 
         .loading-card {
             background: white;
+
             border: 1px solid #e5e8ef;
+
             border-radius: 18px;
+
             padding: 30px 40px;
+
             text-align: center;
-            box-shadow: 0 20px 50px rgba(20, 30, 55, 0.12);
+
+            box-shadow:
+                0 20px 50px rgba(20, 30, 55, 0.12);
         }
 
         .spinner {
             width: 42px;
             height: 42px;
+
             border: 4px solid #e7e9f2;
+
             border-top-color: #4f46e5;
+
             border-radius: 50%;
+
             margin: 0 auto 17px;
+
             animation: spin 0.8s linear infinite;
         }
 
         .loading-card h3 {
             font-size: 15px;
+
             margin-bottom: 5px;
         }
 
         .loading-card p {
             color: #8a94a6;
+
             font-size: 12px;
         }
 
@@ -414,6 +593,7 @@
         }
 
         @media (max-width: 800px) {
+
             .dashboard {
                 grid-template-columns: 1fr;
             }
@@ -436,6 +616,7 @@
         }
 
         @media (max-width: 500px) {
+
             .dashboard,
             .info-section {
                 padding-left: 15px;
@@ -454,57 +635,114 @@
                 font-size: 32px;
             }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <nav class="navbar">
+
         <div class="brand">
-            <div class="brand-icon">K</div>
+
+            <div class="brand-icon">
+                K
+            </div>
+
             Kidney AI
+
         </div>
+
 
         <div class="status">
+
             <span class="status-dot"></span>
+
             Model Ready
+
         </div>
+
     </nav>
 
+
     <section class="hero">
-        <div class="eyebrow">Deep Learning Classification</div>
+
+        <div class="eyebrow">
+            Deep Learning Classification
+        </div>
+
 
         <h1>
+
             Kidney Disease
-            <span>Classification</span>
+
+            <span>
+                Classification
+            </span>
+
         </h1>
 
+
         <p>
-            Upload a kidney CT scan image and let the trained deep learning
-            model classify the image as Normal or Tumor.
+
+            Upload a kidney CT scan image and let the trained
+            deep learning model classify the image as Normal
+            or Tumor.
+
         </p>
+
     </section>
+
+
 
     <main class="dashboard">
 
-        <!-- Upload Card -->
+
         <section class="card">
 
+
             <div class="card-header">
-                <h2>Upload Scan</h2>
-                <p>Select a kidney CT scan image for classification.</p>
+
+                <h2>
+                    Upload Scan
+                </h2>
+
+                <p>
+                    Select a kidney CT scan image for classification.
+                </p>
+
             </div>
 
-            <div class="upload-area" id="uploadArea">
 
-                <div class="upload-placeholder" id="uploadPlaceholder">
-                    <div class="upload-icon">+</div>
 
-                    <h3>Select an image</h3>
+            <div
+                class="upload-area"
+                id="uploadArea"
+            >
+
+
+                <div
+                    class="upload-placeholder"
+                    id="uploadPlaceholder"
+                >
+
+                    <div class="upload-icon">
+                        +
+                    </div>
+
+
+                    <h3>
+                        Select an image
+                    </h3>
+
 
                     <p>
                         JPG, JPEG or PNG images are supported
                     </p>
+
 
                     <button
                         type="button"
@@ -512,23 +750,37 @@
                         id="selectButton"
                         style="max-width: 170px;"
                     >
+
                         Choose Image
+
                     </button>
+
                 </div>
 
-                <img id="photo" src="" alt="Selected kidney scan">
+
+                <img
+                    id="photo"
+                    src=""
+                    alt="Selected kidney scan"
+                >
 
             </div>
 
+
+
             <div class="buttons">
+
 
                 <button
                     type="button"
                     class="btn btn-upload"
                     id="uload"
                 >
+
                     Upload Image
+
                 </button>
+
 
                 <button
                     type="button"
@@ -536,10 +788,15 @@
                     id="send"
                     disabled
                 >
+
                     Predict
+
                 </button>
 
+
             </div>
+
+
 
             <input
                 type="file"
@@ -547,37 +804,66 @@
                 accept="image/png,image/jpeg,image/jpg"
             >
 
+
             <input
                 type="hidden"
                 id="url"
-                value="../predict"
+                value="/predict"
             >
+
 
         </section>
 
 
-        <!-- Result Card -->
+
         <section class="card">
 
+
             <div class="card-header">
-                <h2>Classification Result</h2>
-                <p>Prediction generated by the trained model.</p>
+
+                <h2>
+                    Classification Result
+                </h2>
+
+                <p>
+                    Prediction generated by the trained model.
+                </p>
+
             </div>
 
-            <div class="result-box" id="resultBox">
 
-                <div class="result-empty" id="resultEmpty">
 
-                    <div class="result-icon">?</div>
+            <div
+                class="result-box"
+                id="resultBox"
+            >
 
-                    <h3>No prediction yet</h3>
+
+                <div
+                    class="result-empty"
+                    id="resultEmpty"
+                >
+
+                    <div class="result-icon">
+                        ?
+                    </div>
+
+
+                    <h3>
+                        No prediction yet
+                    </h3>
+
 
                     <p>
+
                         Upload a kidney scan and click Predict
                         to view the classification result.
+
                     </p>
 
                 </div>
+
+
 
                 <div
                     class="result-content"
@@ -585,248 +871,654 @@
                     style="display:none;"
                 >
 
+
                     <div class="result-label">
+
                         Model Prediction
+
                     </div>
+
 
                     <div
                         class="prediction"
                         id="predictionText"
                     >
+
                         Normal
+
                     </div>
+
 
                     <p
                         class="result-message"
                         id="resultMessage"
                     >
+
                         The uploaded image was classified as normal.
+
                     </p>
+
 
                     <div class="result-divider"></div>
 
+
                     <p class="result-note">
-                        This result is generated by an AI classification
-                        model and should not be considered a medical diagnosis.
+
+                        This result is generated by an AI
+                        classification model and should not be
+                        considered a medical diagnosis.
+
                     </p>
+
 
                 </div>
 
+
             </div>
 
+
         </section>
+
 
     </main>
 
 
+
     <section class="info-section">
 
+
         <div class="info-card">
-            <h3>Image Processing</h3>
+
+            <h3>
+                Image Processing
+            </h3>
+
             <p>
+
                 The uploaded image is resized to the model's
                 required 224 × 224 input dimensions.
+
             </p>
+
         </div>
 
+
+
         <div class="info-card">
-            <h3>Deep Learning Model</h3>
+
+            <h3>
+                Deep Learning Model
+            </h3>
+
             <p>
+
                 The application uses a VGG16-based convolutional
                 neural network for classification.
+
             </p>
+
         </div>
 
+
+
         <div class="info-card">
-            <h3>Two Classes</h3>
+
+            <h3>
+                Two Classes
+            </h3>
+
             <p>
+
                 The model classifies images into Normal and
                 Tumor categories.
+
             </p>
+
         </div>
+
 
     </section>
 
 
+
     <footer>
+
         Kidney Disease Classification · Deep Learning Project
+
     </footer>
 
 
-    <!-- Loading Overlay -->
+
     <div id="loading">
 
         <div class="loading-card">
 
             <div class="spinner"></div>
 
-            <h3>Analyzing Image</h3>
+            <h3>
+                Analyzing Image
+            </h3>
 
-            <p>Please wait while the model processes the scan.</p>
+            <p>
+                Please wait while the model processes the scan.
+            </p>
 
         </div>
 
     </div>
 
 
+
     <script>
 
         let base_data = "";
 
-        const fileInput = document.getElementById("fileinput");
-        const photo = document.getElementById("photo");
+        const fileInput =
+            document.getElementById("fileinput");
+
+        const photo =
+            document.getElementById("photo");
+
         const uploadPlaceholder =
             document.getElementById("uploadPlaceholder");
 
-        const uploadButton = document.getElementById("uload");
-        const selectButton = document.getElementById("selectButton");
-        const predictButton = document.getElementById("send");
+        const uploadButton =
+            document.getElementById("uload");
 
-        const loading = document.getElementById("loading");
+        const selectButton =
+            document.getElementById("selectButton");
 
-        const resultEmpty = document.getElementById("resultEmpty");
-        const resultContent = document.getElementById("resultContent");
+        const uploadArea =
+            document.getElementById("uploadArea");
+
+        const predictButton =
+            document.getElementById("send");
+
+        const loading =
+            document.getElementById("loading");
+
+        const resultEmpty =
+            document.getElementById("resultEmpty");
+
+        const resultContent =
+            document.getElementById("resultContent");
+
         const predictionText =
             document.getElementById("predictionText");
+
         const resultMessage =
             document.getElementById("resultMessage");
 
 
-        function openFileSelector() {
-            fileInput.click();
+
+        function resetPrediction() {
+
+            resultEmpty.style.display = "block";
+
+            resultContent.style.display = "none";
+
+            predictionText.textContent = "";
+
+            resultMessage.textContent = "";
+
         }
 
 
-        uploadButton.addEventListener("click", openFileSelector);
-        selectButton.addEventListener("click", openFileSelector);
+
+        function resetImageState() {
+
+            base_data = "";
+
+            predictButton.disabled = true;
+
+            photo.src = "";
+
+            photo.style.display = "none";
+
+            uploadPlaceholder.style.display = "block";
+
+            resetPrediction();
+
+        }
 
 
-        fileInput.addEventListener("change", function () {
 
-            if (!this.files || !this.files[0]) {
-                return;
+        function openFileSelector() {
+
+            /*
+             * Reset the file input value first.
+             *
+             * This is important because selecting the same
+             * image again should still trigger the change event.
+             */
+
+            fileInput.value = "";
+
+            fileInput.click();
+
+        }
+
+
+
+        uploadButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                openFileSelector();
+
             }
-
-            const selectedFile = this.files[0];
-
-            const reader = new FileReader();
-
-            reader.onload = function (event) {
-
-                const imageUrl = event.target.result;
-
-                photo.src = imageUrl;
-
-                photo.style.display = "block";
-
-                uploadPlaceholder.style.display = "none";
+        );
 
 
-                const img = new Image();
 
-                img.onload = function () {
+        selectButton.addEventListener(
+            "click",
+            function (event) {
 
-                    const canvas =
-                        document.createElement("canvas");
+                event.stopPropagation();
 
-                    const context =
-                        canvas.getContext("2d");
+                openFileSelector();
 
-                    canvas.width = img.width;
-                    canvas.height = img.height;
+            }
+        );
 
-                    context.drawImage(
-                        img,
-                        0,
-                        0,
-                        img.width,
-                        img.height
+
+
+        uploadArea.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === uploadArea ||
+                    event.target === uploadPlaceholder
+                ) {
+
+                    openFileSelector();
+
+                }
+
+            }
+        );
+
+
+
+        fileInput.addEventListener(
+            "change",
+            function () {
+
+                if (
+                    !this.files ||
+                    !this.files.length
+                ) {
+
+                    return;
+
+                }
+
+
+                const selectedFile =
+                    this.files[0];
+
+
+                /*
+                 * Clear everything from the previous image
+                 * before processing the new image.
+                 */
+
+                base_data = "";
+
+                predictButton.disabled = true;
+
+                resetPrediction();
+
+
+                /*
+                 * Check that the selected file is an image.
+                 */
+
+                if (
+                    !selectedFile.type.startsWith("image/")
+                ) {
+
+                    alert(
+                        "Please select a valid image file."
                     );
 
-                    base_data = canvas
-                        .toDataURL("image/jpeg", 1.0)
-                        .replace(
-                            /^data:image\/.+;base64,/,
-                            ""
+                    fileInput.value = "";
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload = function (event) {
+
+                    const imageUrl =
+                        event.target.result;
+
+
+                    photo.src = imageUrl;
+
+                    photo.style.display = "block";
+
+                    uploadPlaceholder.style.display =
+                        "none";
+
+
+                    const img =
+                        new Image();
+
+
+                    img.onload = function () {
+
+                        try {
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            const context =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            canvas.width =
+                                img.width;
+
+                            canvas.height =
+                                img.height;
+
+
+                            context.drawImage(
+                                img,
+                                0,
+                                0,
+                                img.width,
+                                img.height
+                            );
+
+
+                            /*
+                             * Convert image to JPEG Base64.
+                             */
+
+                            const jpegData =
+                                canvas
+                                    .toDataURL(
+                                        "image/jpeg",
+                                        1.0
+                                    );
+
+
+                            base_data =
+                                jpegData.replace(
+                                    /^data:image\/.+;base64,/,
+                                    ""
+                                );
+
+
+                            canvas.remove();
+
+
+                            /*
+                             * Enable prediction only after
+                             * the image has been completely
+                             * converted.
+                             */
+
+                            if (base_data) {
+
+                                predictButton.disabled =
+                                    false;
+
+                            }
+
+
+                        } catch (error) {
+
+                            console.error(
+                                "Image processing error:",
+                                error
+                            );
+
+                            base_data = "";
+
+                            predictButton.disabled =
+                                true;
+
+                            alert(
+                                "Unable to process this image. Please try another image."
+                            );
+
+                        }
+
+                    };
+
+
+                    img.onerror = function () {
+
+                        base_data = "";
+
+                        predictButton.disabled =
+                            true;
+
+                        alert(
+                            "Unable to load the selected image. Please try another image."
                         );
 
-                    canvas.remove();
+                    };
 
-                    predictButton.disabled = false;
+
+                    img.src = imageUrl;
+
                 };
 
-                img.src = imageUrl;
-            };
 
-            reader.readAsDataURL(selectedFile);
-        });
+                reader.onerror = function () {
+
+                    base_data = "";
+
+                    predictButton.disabled =
+                        true;
+
+                    alert(
+                        "Unable to read the selected image."
+                    );
+
+                };
 
 
-        predictButton.addEventListener("click", function () {
+                reader.readAsDataURL(
+                    selectedFile
+                );
 
-            if (!base_data) {
-                return;
             }
-
-            sendRequest(base_data);
-
-        });
+        );
 
 
-        function sendRequest(base64Data) {
+
+        /*
+         * Drag and drop support.
+         */
+
+        uploadArea.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadArea.classList.add(
+                    "dragover"
+                );
+
+            }
+        );
+
+
+
+        uploadArea.addEventListener(
+            "dragleave",
+            function () {
+
+                uploadArea.classList.remove(
+                    "dragover"
+                );
+
+            }
+        );
+
+
+
+        uploadArea.addEventListener(
+            "drop",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadArea.classList.remove(
+                    "dragover"
+                );
+
+
+                const files =
+                    event.dataTransfer.files;
+
+
+                if (
+                    !files ||
+                    !files.length
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Put the dropped file into the file
+                 * input and trigger the same processing.
+                 */
+
+                try {
+
+                    const dataTransfer =
+                        new DataTransfer();
+
+                    dataTransfer.items.add(
+                        files[0]
+                    );
+
+                    fileInput.files =
+                        dataTransfer.files;
+
+                    fileInput.dispatchEvent(
+                        new Event("change")
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Drag and drop error:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        predictButton.addEventListener(
+            "click",
+            function () {
+
+                if (!base_data) {
+
+                    alert(
+                        "Please select an image first."
+                    );
+
+                    return;
+
+                }
+
+
+                sendRequest(base_data);
+
+            }
+        );
+
+
+
+        async function sendRequest(base64Data) {
 
             const url =
                 document.getElementById("url").value;
 
-            loading.style.display = "flex";
 
-            predictButton.disabled = true;
+            loading.style.display =
+                "flex";
 
 
-            fetch(url, {
+            predictButton.disabled =
+                true;
 
-                method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            try {
 
-                body: JSON.stringify({
-                    image: base64Data
-                })
+                const response =
+                    await fetch(
+                        url,
+                        {
+                            method: "POST",
 
-            })
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
 
-            .then(function (response) {
+                            body: JSON.stringify({
+                                image: base64Data
+                            })
+                        }
+                    );
+
+
+                const res =
+                    await response.json();
+
 
                 if (!response.ok) {
+
                     throw new Error(
+                        res.error ||
                         "Prediction request failed."
                     );
+
                 }
-
-                return response.json();
-
-            })
-
-            .then(function (res) {
-
-                loading.style.display = "none";
-
-                predictButton.disabled = false;
 
 
                 let prediction = "";
 
+
                 /*
-                 * Your existing Flask API returns:
+                 * Flask returns:
                  *
                  * [
-                 *     {"image": "Normal"},
-                 *     ...
+                 *     {
+                 *         "image": "Normal"
+                 *     }
                  * ]
-                 *
-                 * Therefore we read res[0].image.
                  */
 
                 if (
@@ -834,32 +1526,58 @@
                     res.length > 0 &&
                     res[0].image
                 ) {
-                    prediction = res[0].image;
+
+                    prediction =
+                        res[0].image;
+
+                }
+
+
+                /*
+                 * Also support an error response.
+                 */
+
+                if (
+                    !prediction &&
+                    res.error
+                ) {
+
+                    throw new Error(
+                        res.error
+                    );
+
                 }
 
 
                 if (!prediction) {
 
-                    resultEmpty.style.display = "block";
-                    resultContent.style.display = "none";
+                    throw new Error(
+                        "The model did not return a prediction."
+                    );
 
-                    return;
                 }
 
 
-                resultEmpty.style.display = "none";
-                resultContent.style.display = "block";
+                resultEmpty.style.display =
+                    "none";
+
+                resultContent.style.display =
+                    "block";
 
 
-                predictionText.textContent = prediction;
+                predictionText.textContent =
+                    prediction;
 
 
                 if (
-                    prediction.toLowerCase().includes("tumor")
+                    prediction
+                        .toLowerCase()
+                        .includes("tumor")
                 ) {
 
                     predictionText.className =
                         "prediction tumor";
+
 
                     resultMessage.textContent =
                         "The uploaded image was classified as a tumor.";
@@ -869,33 +1587,53 @@
                     predictionText.className =
                         "prediction normal";
 
+
                     resultMessage.textContent =
                         "The uploaded image was classified as normal.";
 
                 }
 
-            })
 
-            .catch(function (error) {
+            } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Prediction error:",
+                    error
+                );
 
-                loading.style.display = "none";
 
-                predictButton.disabled = false;
+                resultEmpty.style.display =
+                    "block";
 
-                resultEmpty.style.display = "block";
-                resultContent.style.display = "none";
+                resultContent.style.display =
+                    "none";
+
 
                 alert(
+                    error.message ||
                     "Unable to process the image. Please try again."
                 );
 
-            });
+            } finally {
+
+                loading.style.display =
+                    "none";
+
+
+                /*
+                 * Allow another prediction.
+                 */
+
+                predictButton.disabled =
+                    !base_data;
+
+            }
 
         }
 
     </script>
 
+
 </body>
+
 </html>
