@@ -1,6 +1,7 @@
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.vgg16 import preprocess_input
 
 
 class PredictionPipeline:
@@ -10,7 +11,7 @@ class PredictionPipeline:
 
     def predict(self):
 
-        # Load the trained model from the model folder
+        # Load trained model
         model = load_model("model/model.h5")
 
         # Load image
@@ -19,11 +20,11 @@ class PredictionPipeline:
             target_size=(224, 224)
         )
 
-        # Convert image to array
+        # Convert image to numpy array
         test_image = image.img_to_array(test_image)
 
-        # Normalize exactly like training
-        test_image = test_image / 255.0
+        # Apply the SAME preprocessing used during training
+        test_image = preprocess_input(test_image)
 
         # Add batch dimension
         test_image = np.expand_dims(test_image, axis=0)
@@ -49,7 +50,7 @@ class PredictionPipeline:
             result[0]
         )
 
-        # Class mapping:
+        # Class mapping
         # Normal = 0
         # Tumor = 1
 
