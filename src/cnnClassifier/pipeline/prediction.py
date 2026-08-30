@@ -1,5 +1,5 @@
 import numpy as np
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
 
@@ -9,30 +9,41 @@ class PredictionPipeline:
     def __init__(self, filename):
         self.filename = filename
 
+        self.interpreter = tf.lite.Interpreter(
+            model_path="model/model.tflite"
+        )
+
+        self.interpreter.allocate_tensors()
+
+        self.input_details = self.interpreter.get_input_details()
+        self.output_details = self.interpreter.get_output_details()
+
     def predict(self):
 
-        # Load trained model
-        model = load_model("model/model.h5")
-
-        # Load image
         test_image = image.load_img(
             self.filename,
             target_size=(224, 224)
         )
 
-        # Convert image to numpy array
         test_image = image.img_to_array(test_image)
 
-        # Apply the SAME preprocessing used during training
         test_image = preprocess_input(test_image)
 
-        # Add batch dimension
         test_image = np.expand_dims(test_image, axis=0)
 
-        # Make prediction
-        prediction_probability = model.predict(
-            test_image,
-            verbose=0
+        test_image = test_image.astype(
+            self.input_details[0]["dtype"]
+        )
+
+        self.interpreter.set_tensor(
+            self.input_details[0]["index"],
+            test_image
+        )
+
+        self.interpreter.invoke()
+
+        prediction_probability = self.interpreter.get_tensor(
+            self.output_details[0]["index"]
         )
 
         result = np.argmax(
@@ -49,10 +60,6 @@ class PredictionPipeline:
             "Predicted class:",
             result[0]
         )
-
-        # Class mapping
-        # Normal = 0
-        # Tumor = 1
 
         if result[0] == 1:
             prediction = "Tumor"
