@@ -4,6 +4,11 @@ A production-grade deep learning project for classifying kidney CT scan images i
 
 **Repository:** [Kidney-Disease-Classification-Deep-Learning](https://github.com/Mahreen17/Kidney-Disease-Classification-Deep-Learning)
 
+**Live:** "https://kidney-disease-classification-deep-girb.onrender.com/"
+
+**Demo video:** "https://drive.google.com/file/d/1vydNb7olQKpPyT3e2FlV57fX1GppeygZ/view?usp=sharing"
+
+
 ---
 
 ## Project Overview
